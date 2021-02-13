@@ -14,11 +14,14 @@ class Player {
     
     drawPlayer() {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 4, Math.PI * 2, false);
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
         ctx.fill();
     }
-    
 }
 
-const domo = new Player(100, 100, 30, 'red');
+const x = canvas.width / 2;
+const y = canvas.height /2;
+
+const domo = new Player(x, y, 30, 'red');
 domo.drawPlayer();
