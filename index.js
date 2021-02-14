@@ -49,14 +49,15 @@ const y = canvas.height / 2;
 
 // creating a player
 const domo = new Player(x, y, 30, 'black');
-domo.drawPlayer();
+
 
 const meci = [];
 
 
 function animate() {
     requestAnimationFrame(animate);
-
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    domo.drawPlayer();
     meci.forEach(metak => {
         metak.update();
     })
