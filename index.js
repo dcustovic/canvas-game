@@ -51,25 +51,7 @@ const y = canvas.height / 2;
 const domo = new Player(x, y, 30, 'black');
 domo.drawPlayer();
 
-// creating a projectile
-// note that the x and y coordinate might need changing
-const metak = new Projectile(
-    x,
-    y,
-    5,
-    'lime',
-    {x: 3, y: 3}
-);
-
-const metak2 = new Projectile(
-    x,
-    y,
-    5,
-    'red',
-    {x: -1, y: -5}
-);
-
-const meci = [metak, metak2];
+const meci = [];
 
 
 function animate() {
@@ -81,9 +63,16 @@ function animate() {
 }
 
 
-
+// creating a projectile when we click
+// note that the x and y coordinate might need changing
 window.addEventListener('click', (event) => {
-    
+    meci.push(new Projectile(
+        x,
+        y,
+        5,
+        'red',
+        {x: 1, y: 1}
+    ))
 });
 
 animate();
