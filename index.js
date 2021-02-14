@@ -35,21 +35,43 @@ class Projectile {
         ctx.fillStyle = this.color;
         ctx.fill();
     }
+
+    update() {
+        this.x =  this.x + this.velocity.x;
+        this.y =  this.y + this.velocity.y;
+    }
 }
 
 const x = canvas.width / 2;
 const y = canvas.height / 2;
 
+
+// creating a player
 const domo = new Player(x, y, 30, 'black');
 domo.drawPlayer();
 
-window.addEventListener('click', (event) => {
-    const metak = new Projectile(
-        x,
-        y,
-        5,
-        'lime',
-        null
-    );
+//creating a projectile
+// note that the x and y coordinate might need changing
+const metak = new Projectile(
+    x,
+    y,
+    5,
+    'lime',
+    {x: 3, y: 3}
+);
+
+
+
+function animate() {
+    requestAnimationFrame(animate);
     metak.drawProjecile();
-})
+    metak.update();
+}
+
+
+
+window.addEventListener('click', (event) => {
+    
+});
+
+animate();
