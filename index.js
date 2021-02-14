@@ -66,12 +66,22 @@ function animate() {
 // creating a projectile when we click
 // note that the x and y coordinate might need changing
 window.addEventListener('click', (event) => {
+    const angle = Math.atan2(
+        event.clientY - canvas.height / 2,
+        event.clientX - canvas.width / 2
+    );
+    
+    const velocity = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+    }
+
     meci.push(new Projectile(
         x,
         y,
         5,
         'red',
-        {x: 1, y: 1}
+        velocity
     ))
 });
 
