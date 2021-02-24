@@ -92,14 +92,20 @@ function animate() {
 
 function spawnNeprijatelj() {
     setInterval(() => { 
-        const x = 100;
-        const y = 100;
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
         const radius = 30;
         const color = 'red';
-        const velocity = {
-            x: 1,
-            y: 1
-        }
+        
+        const angle = Math.atan2(
+        canvas.height / 2 - y,
+        canvas.width / 2 - x
+    );
+    
+    const velocity = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+    }
 
         neprijatelji.push(new Neprijatelj(x, y, radius, color, velocity))
     }, 1000)
