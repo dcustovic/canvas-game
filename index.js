@@ -12,7 +12,7 @@ class Player {
         this.color = color;
     }
     
-    drawPlayer() {
+    draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         ctx.fillStyle = this.color;
@@ -29,7 +29,7 @@ class Projectile {
         this.velocity = velocity;
     }
 
-    drawProjecile() {
+    draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         ctx.fillStyle = this.color;
@@ -37,7 +37,30 @@ class Projectile {
     }
 
     update() {
-        this.drawProjecile();
+        this.draw();
+        this.x =  this.x + this.velocity.x;
+        this.y =  this.y + this.velocity.y;
+    }
+}
+
+class Neprijatelj {
+    constructor(x, y, radius, color, velocity) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = color;
+        this.velocity = velocity;
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    }
+
+    update() {
+        this.draw();
         this.x =  this.x + this.velocity.x;
         this.y =  this.y + this.velocity.y;
     }
@@ -51,16 +74,35 @@ const y = canvas.height / 2;
 const domo = new Player(x, y, 30, 'black');
 
 
-const meci = [];
+const metci = [];
+const neprijatelji = [];
 
 
 function animate() {
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    domo.drawPlayer();
-    meci.forEach(metak => {
-        metak.update();
+    domo.draw();
+    metci.forEach(m => {
+        m.update();
+    });
+    neprijatelji.forEach(n => {
+        n.update();
     })
+}
+
+function spawnNeprijatelj() {
+    setInterval(() => { 
+        const x = 100;
+        const y = 100;
+        const radius = 30;
+        const color = 'red';
+        const velocity = {
+            x: 1,
+            y: 1
+        }
+
+        neprijatelji.push(new Neprijatelj(x, y, radius, color, velocity))
+    }, 1000)
 }
 
 
@@ -77,13 +119,14 @@ window.addEventListener('click', (event) => {
         y: Math.sin(angle)
     }
 
-    meci.push(new Projectile(
+    metci.push(new Projectile(
         x,
         y,
         5,
-        'red',
+        'black',
         velocity
     ))
 });
 
 animate();
+spawnNeprijatelj();
